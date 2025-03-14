@@ -1,0 +1,92 @@
+.Popup {
+  display: grid;
+  justify-items: center;
+  width: 100vw;
+  min-height: 100vh;
+  height: 100%;
+  overflow-y: auto;
+  padding: em(30px) 0;
+  position: fixed;
+  z-index: $popup;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: all $speed ease;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE и Edge */
+  scrollbar-width: none; /* Firefox */
+
+  @include ifmobile {
+    padding: 0;
+  }
+
+  &_Overlay {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  &_Content {
+    position: relative;
+    width: 100%;
+    max-width: em(552px);
+    height: max-content;
+    padding: em(32px);
+    margin: 0 auto;
+    background: #fff;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: em(30px);
+    transform: scale(0.8);
+    transition: transform $speed ease;
+    @include iftablet {
+      max-width: em(453px);
+    }
+    @include ifmobile {
+      max-width: 100%;
+    }
+
+    @include ifmobile {
+      max-width: em(320px);
+      padding: em(32px) em(16px) em(16px);
+      border-radius: 0;
+      height: 100%;
+    }
+  }
+
+  &_Close {
+    cursor: pointer;
+    position: absolute;
+    top: em(16px);
+    right: em(16px);
+    width: em(40px);
+    height: em(40px);
+    transition: transform $speed ease;
+    @include ifmobile {
+      width: em(24px);
+      height: em(24px);
+    }
+
+    &:hover {
+      transform: rotate(90deg);
+    }
+  }
+
+  &_Visible {
+    opacity: 1;
+    pointer-events: initial;
+    .Popup_Content {
+      transform: scale(1);
+    }
+  }
+}
