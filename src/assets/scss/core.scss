@@ -1,0 +1,175 @@
+@use 'sass:math';
+
+html {
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  line-height: 1.2;
+  scroll-behavior: smooth;
+}
+
+@media screen and (max-aspect-ratio: 1600/720) {
+  html {
+    font-size: math.div(16, 1600) * 100vw;
+  }
+}
+
+@media only screen and (min-width: 1600px) and (max-aspect-ratio: 1600/720) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-height: 720px) and (min-aspect-ratio: 1600/720) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  @include iflaptop {
+    font-size: math.div(16, 1024) * 100vw;
+  }
+
+  @include iftablet {
+    font-size: math.div(16, 768) * 100vw;
+  }
+
+  @include ifmobile {
+    font-size: math.div(16, 360) * 100vw;
+  }
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background: #d9d9d9;
+
+  /* width */
+  &::-webkit-scrollbar {
+    width: em(6px) !important;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: rgba(153, 153, 153, 0.4) !important;
+    border-radius: em(10px) !important;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  //ДЛЯ ВЫЯВЛЕНИЯ ВЫЛЕЗАЮЩИХ ЗА СТРАНИЦУ БЛОКОВ
+  // border: 1px solid red;
+  &::before,
+  &::after {
+    box-sizing: border-box;
+  }
+}
+
+picture {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  // -o-object-fit: cover;
+  // object-fit: cover;
+}
+
+textarea {
+  overflow: auto;
+  resize: vertical;
+}
+
+textarea::placeholder {
+  line-height: 100%;
+}
+input::placeholder {
+  font-weight: 200 !important;
+}
+
+//УБИРАЕМ ДЕФОЛТНЫЕ СТРЕЛОЧКИ В ИНПУТ type НОМЕР
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+input[type='number']:hover,
+input[type='number']:focus {
+  -moz-appearance: number-input;
+}
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+// ОТКЛЮЧАЕМ СТИЛИ АВТОЗАПОЛНЕНИЯ ПОЛЕЙ
+input:-internal-autofill-selected,
+input:-webkit-autofill {
+  &:hover,
+  &:focus,
+  &:active {
+    transition-delay: 9999s !important;
+    transition-property: background-color, color !important;
+  }
+}
+
+@-webkit-keyframes autofill {
+  0%,
+  100% {
+    color: #666;
+    background: transparent;
+  }
+}
+
+input:-webkit-autofill {
+  -webkit-animation-delay: 1s; /* Safari support - any positive time runs instantly */
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+input[data-autocompleted] {
+  background-color: transparent !important;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+select:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+  -webkit-background-clip: text !important;
+}

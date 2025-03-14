@@ -1,0 +1,90 @@
+.Button {
+  // global
+  position: relative;
+  font-size: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+  @extend %button;
+  border-radius: em(2px);
+  transition: all 0.3s ease;
+  // text
+  color: rgb(255, 255, 255);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  user-select: none;
+  text-align: center;
+  font-style: normal;
+  line-height: normal;
+
+  &_default {
+    height: em(56px);
+    padding: em(16px) em(20px);
+    font-size: em(16px);
+  }
+
+  &_mini {
+    height: em(56px);
+    padding: em(16px) em(20px);
+    font-size: em(16px);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:focus-visible {
+    border: 1px solid black;
+  }
+}
+
+//primary
+.Button_primary {
+  background: #2a86ff;
+  &:hover {
+    background: rgb(0, 78, 180);
+  }
+}
+
+//secondary
+.Button_secondary {
+  background: #7bc950;
+  &:hover {
+    background: rgb(68, 150, 40);
+  }
+}
+
+//empty
+.Button_empty {
+  border: 1px solid #2a86ff;
+  background: none;
+  color: #2a86ff;
+
+  &:hover {
+    border: 1px solid rgb(0, 78, 180);
+    background: rgb(0, 78, 180);
+    color: #fff;
+  }
+}
+
+// link
+.Button_link {
+  background: none;
+  color: #2a86ff;
+  &:hover {
+    text-decoration: underline;
+  }
+  &:active {
+    transform: scale(1);
+  }
+}
+
+//disabled style
+.Button:disabled,
+.Button:disabled:hover,
+.Button:disabled:active {
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  opacity: 0.5;
+}

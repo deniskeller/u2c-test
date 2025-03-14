@@ -1,0 +1,32 @@
+.Text {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  transform-style: preserve-3d;
+  &_h1 {
+    color: #000;
+    font-size: em(32px);
+    font-weight: 500;
+		font-weight: 1.2;
+  }
+
+  &_h2 {
+    color: rgb(55, 55, 55);
+    font-size: em(52px);
+    line-height: 135%;
+    font-weight: 500;
+  }
+
+  &_p {
+    color: rgb(99, 99, 99);
+    font-size: em(16px);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+}
+
+@include iflaptop {
+}
+@include iftablet {
+}
+@include ifmobile {
+}
