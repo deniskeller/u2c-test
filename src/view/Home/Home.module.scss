@@ -1,8 +1,8 @@
 .Home {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @extend %center; 
   flex-direction: column;
   min-height: 100vh;
-  padding: em(40px) 0;
+  padding: em(20px);
+  background: #ff5e56
+    linear-gradient(232deg, #dc3131 0%, rgba(255, 79, 79, 0) 93.23%);
 }

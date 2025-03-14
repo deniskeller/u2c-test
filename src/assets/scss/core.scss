@@ -1,25 +1,25 @@
 @use 'sass:math';
 
 html {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Lab Grotesque', sans-serif;
   font-weight: normal;
   line-height: 1.2;
   scroll-behavior: smooth;
 }
 
-@media screen and (max-aspect-ratio: 1600/720) {
+@media screen and (max-aspect-ratio: 1440/720) {
   html {
-    font-size: math.div(16, 1600) * 100vw;
+    font-size: math.div(16, 1440) * 100vw;
   }
 }
 
-@media only screen and (min-width: 1600px) and (max-aspect-ratio: 1600/720) {
+@media only screen and (min-width: 1440px) and (max-aspect-ratio: 1440/720) {
   html {
     font-size: 16px;
   }
 }
 
-@media only screen and (min-height: 720px) and (min-aspect-ratio: 1600/720) {
+@media only screen and (min-height: 720px) and (min-aspect-ratio: 1440/720) {
   html {
     font-size: 16px;
   }
@@ -27,7 +27,7 @@ html {
 
 html {
   @include iflaptop {
-    font-size: math.div(16, 1024) * 100vw;
+    font-size: math.div(16, 1440) * 100vw;
   }
 
   @include iftablet {
@@ -35,14 +35,14 @@ html {
   }
 
   @include ifmobile {
-    font-size: math.div(16, 360) * 100vw;
+    font-size: math.div(16, 320) * 100vw;
   }
 }
 
 body {
   width: 100%;
   height: 100%;
-  background: #d9d9d9;
+  background: #fff;
 
   /* width */
   &::-webkit-scrollbar {
@@ -73,7 +73,7 @@ ul {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  //ДЛЯ ВЫЯВЛЕНИЯ ВЫЛЕЗАЮЩИХ ЗА СТРАНИЦУ БЛОКОВ
+  // ДЛЯ ВЫЯВЛЕНИЯ ВЫЛЕЗАЮЩИХ ЗА СТРАНИЦУ БЛОКОВ
   // border: 1px solid red;
   &::before,
   &::after {

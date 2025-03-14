@@ -1,20 +1,20 @@
-//z-index-ы
+// z-index-ы
 $popup: 1000;
 $toast: 1001;
 
-$speed: 0.3s;
+// base settings
+$speed: 0.5s;
+
+// colors
 $white: rgb(255, 255, 255);
-
-
 $error: rgb(255, 63, 63);
 $pr1: #f98973;
 $pr2: #6d6bce;
 $purple: rgb(118, 86, 245);
-$text: rgb(55, 55, 55); //#373737
+$text: rgb(55, 55, 55);
 $border: rgb(240, 240, 240);
 
-
-$blue: #2A86FF;
+$blue: #2a86ff;
 $black: #000;
-$green: #87CC6F;
-$grey: rgb(99, 99, 99); //#636363
+$green: #87cc6f;
+$grey: rgb(99, 99, 99);
