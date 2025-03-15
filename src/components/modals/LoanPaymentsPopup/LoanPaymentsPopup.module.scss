@@ -81,6 +81,10 @@
   }
 
   .TotalPrice {
+    
+    @include ifmobile {
+      margin-bottom: em(38px);
+    }
     &_Value {
       font-weight: 400;
       font-size: em(24px);
