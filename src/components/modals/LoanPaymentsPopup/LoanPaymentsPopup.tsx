@@ -11,20 +11,29 @@ interface Props {
   onClick2: (ev: React.MouseEvent<HTMLElement>) => void;
 }
 
-const LoanPaymentsPopup: React.FC<Props> = ({ opened, onClick, onClick2 }) => {
-  const options = [
-    { label: '12', value: '12' },
-    { label: '24', value: '24' },
-    { label: '36', value: '36' },
-    {
-      label: '48',
-      value: '48',
-      // disabled: true
-    },
-  ];
+const MONTHS_OPTIONS = [
+  { label: '12', value: '12' },
+  { label: '24', value: '24' },
+  { label: '36', value: '36' },
+  {
+    label: '48',
+    value: '48',
+    // disabled: true
+  },
+];
 
-  const handleRadioChange = (value: string) => {
-    console.log('Selected value:', value);
+const PERIOD_OPTIONS = [
+  { label: 'в год', value: '1' },
+  { label: 'в месяц', value: '12' },
+];
+
+const LoanPaymentsPopup: React.FC<Props> = ({ opened, onClick, onClick2 }) => {
+  const handleMonthsChange = (value: string) => {
+    console.log('Selected MONTHS_OPTIONS value:', value);
+  };
+
+  const handlePeriodChange = (value: string) => {
+    console.log('Selected PERIOD_OPTIONS value:', value);
   };
 
   return (
@@ -58,24 +67,26 @@ const LoanPaymentsPopup: React.FC<Props> = ({ opened, onClick, onClick2 }) => {
 
         <BaseRadioButton
           variant="tag"
-          options={options}
-          onChange={handleRadioChange}
+          defaultValue={MONTHS_OPTIONS[2].value}
+          options={MONTHS_OPTIONS}
+          onChange={handleMonthsChange}
           className={s.SelectMonths_Value}
         />
       </div>
 
-      <div className={s.SelectMonths}>
-        <BaseText as="h2" className={s.SelectMonths_Label}>
-          Количество месяцев?
+      {/* <div className={s.SelectPeriod}>
+        <BaseText as="h2" className={s.SelectPeriod_Label}>
+          Итого ваш платеж по кредиту:
         </BaseText>
 
         <BaseRadioButton
           variant="tag"
-          options={options}
-          onChange={handleRadioChange}
-          className={s.SelectMonths_Value}
+          defaultValue={PERIOD_OPTIONS[0].value}
+          options={PERIOD_OPTIONS}
+          onChange={handlePeriodChange}
+          className={s.SelectPeriod_Value}
         />
-      </div>
+      </div> */}
 
       <BaseButton className={s.Add} onClick={onClick2}>
         Добавить

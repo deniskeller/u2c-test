@@ -6,6 +6,11 @@
   align-items: center;
   cursor: pointer;
 
+  min-width: em(39px);
+  height: em(36px);
+  border-radius: em(50px);
+  padding: em(6px) em(12px);
+
   // DEFAULT STYLE
   .Title {
     font-weight: 400;
@@ -85,11 +90,6 @@
 
   // TAG STYLE
   &_tag {
-    min-width: em(39px);
-    height: em(36px);
-    border-radius: em(50px);
-    padding: em(6px) em(12px);
-
     .RadioButtonTick {
       display: none;
     }
@@ -97,8 +97,8 @@
     .RadioButtonCheck {
       @extend %fullsize;
       position: absolute;
-      min-width: inherit;
-      height: inherit;
+      min-width: 100%;
+      height: 100%;
       border-radius: em(50px);
       border: none;
       transition: all $speed ease;

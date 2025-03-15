@@ -51,12 +51,31 @@
     }
   }
 
+  .SelectPeriod {
+    margin: em(22px) 0 em(31px);
+    &_Label {
+      margin-bottom: em(11px);
+    }
+    &_Value {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      label:not(:last-child) {
+        margin-right: em(8px);
+      }
+      @include ifmobile {
+        // flex-direction: column;
+        // align-self: start;
+      }
+    }
+  }
+
   .Add {
     width: 100%;
-		margin-top: em(47px);
-		@include ifmobile {
-			margin-top: auto;
-		}
+    margin-top: em(47px);
+    @include ifmobile {
+      margin-top: auto;
+    }
   }
 }
 
@@ -64,4 +83,3 @@
 }
 @include iftablet {
 }
-

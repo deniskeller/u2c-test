@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import s from './BaseRadioButton.module.scss';
 
-interface Option {
+interface IOption {
   label: string;
   value: string;
   disabled?: boolean;
 }
 
 interface Props {
-  options: Option[];
+  defaultValue: string;
+  options: IOption[];
   onChange: (value: string) => void;
   className?: string;
   variant?: string;
@@ -16,14 +17,16 @@ interface Props {
 
 const BaseRadioButton: React.FC<Props> = ({
   options,
+  defaultValue,
   onChange,
   className = '',
   variant = 'default',
 }) => {
-  const [selectedValue, setSelectedValue] = useState<string>(options[2].value);
+  const [selectedValue, setSelectedValue] = useState<string>(defaultValue);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
+    console.log('value: ', value);
     setSelectedValue(value);
     onChange(value);
   };
