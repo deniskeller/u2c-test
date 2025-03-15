@@ -1,7 +1,6 @@
 export enum ComponentsIcons {
   EYE = 'EYE',
   EYE_OFF = 'EYE_OFF',
-  CHEVRON = 'CHEVRON',
 }
 
 export const componentsIcons = {
