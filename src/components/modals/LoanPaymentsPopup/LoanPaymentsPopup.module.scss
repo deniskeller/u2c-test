@@ -33,6 +33,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-bottom: em(22px);
     @include ifmobile {
       flex-direction: column;
       align-items: start;
@@ -58,9 +59,9 @@
   }
 
   .SelectPeriod {
-    margin: em(22px) 0 em(31px);
+    margin-bottom: em(31px);
     @include ifmobile {
-      margin: em(16px) 0 em(26px);
+      margin-bottom: em(26px);
     }
     &_Label {
       margin-bottom: em(11px);
@@ -81,7 +82,7 @@
   }
 
   .TotalPrice {
-    
+    margin-bottom: em(22px);
     @include ifmobile {
       margin-bottom: em(38px);
     }
@@ -98,7 +99,7 @@
 
   .Add {
     width: 100%;
-    margin-top: em(47px);
+    margin-top: em(27px);
     @include ifmobile {
       margin-top: auto;
     }
