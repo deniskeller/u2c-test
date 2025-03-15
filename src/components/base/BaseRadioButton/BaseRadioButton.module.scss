@@ -1,0 +1,138 @@
+.RadioButton {
+  position: relative;
+  user-select: none;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+
+  // DEFAULT STYLE
+  .Title {
+    font-weight: 400;
+    font-size: em(14px);
+    line-height: 171%;
+    text-align: center;
+    color: #000;
+    position: relative;
+    z-index: 10;
+  }
+
+  .Input {
+    font-size: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    pointer-events: none;
+    &:focus-visible + .RadioButtonCheck {
+      border: 1px solid black;
+    }
+  }
+
+  .RadioButtonCheck {
+    width: em(20px);
+    height: em(20px);
+    border-radius: 50%;
+    position: relative;
+    border: 2px solid #eef0f2;
+    transition: border-color $speed ease;
+    margin-right: em(6px);
+  }
+
+  .RadioButtonTick {
+    width: em(10px);
+    height: em(10px);
+    border-radius: 50%;
+    position: absolute;
+    background: #ff5e56;
+    top: 50%;
+    left: 50%;
+    visibility: hidden;
+    transform: translate(-50%, -50%) scale(0.5);
+    transition: transform $speed ease;
+  }
+
+  &:hover {
+    .RadioButtonCheck {
+      border-color: #dfe3e6;
+    }
+  }
+
+  &.isActive {
+    border-color: #ff5e56;
+    position: relative;
+    .RadioButtonCheck {
+      border-color: #ff5e56;
+    }
+    .RadioButtonTick {
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  &.Disabled {
+    cursor: not-allowed;
+    color: #bec5cc;
+    .RadioButtonCheck {
+      border-color: #bec5cc;
+    }
+    .RadioButtonTick {
+      background: #bec5cc;
+    }
+  }
+
+  // TAG STYLE
+  &_tag {
+    min-width: em(39px);
+    height: em(36px);
+    border-radius: em(50px);
+    padding: em(6px) em(12px);
+
+    .RadioButtonTick {
+      display: none;
+    }
+
+    .RadioButtonCheck {
+      @extend %fullsize;
+      position: absolute;
+      min-width: inherit;
+      height: inherit;
+      border-radius: em(50px);
+      border: none;
+      transition: all $speed ease;
+      margin-right: 0;
+      background: #eef0f2;
+    }
+
+    .Title {
+      color: #000;
+    }
+
+    &:hover {
+      .RadioButtonCheck {
+        background: #dfe3e6;
+      }
+    }
+
+    &.isActive {
+      .RadioButtonCheck {
+        background: #ff5e56
+          linear-gradient(232deg, #dc3131 0%, rgba(255, 79, 79, 0) 93.23%);
+      }
+
+      .Title {
+        color: #fff;
+      }
+    }
+
+    &.Disabled {
+      cursor: not-allowed;
+      color: #bec5cc;
+      .RadioButtonCheck {
+        background: #bec5cc;
+      }
+    }
+  }
+}

@@ -1,15 +1,67 @@
 .Popup {
   max-width: em(552px);
-	@include iftablet {
+  @include iftablet {
     max-width: em(453px);
   }
   @include ifmobile {
     max-width: 100%;
   }
+
+  .Title {
+    display: inline-flex;
+    margin-bottom: em(6px);
+    @include ifmobile {
+      margin-bottom: em(16px);
+    }
+  }
+
+  .Amount {
+    margin: em(10px) 0 em(8px);
+    @include ifmobile {
+    }
+  }
+
+  .Calculate {
+    margin-bottom: em(16px, 14px);
+  }
+
+  .SelectMonths {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    @include ifmobile {
+      flex-direction: column;
+      align-self: start;
+    }
+    &_Label {
+      margin-right: em(38px);
+    }
+
+    &_Value {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      label:not(:last-child) {
+        margin-right: em(8px);
+      }
+      @include ifmobile {
+        // flex-direction: column;
+        // align-self: start;
+      }
+    }
+  }
+
+  .Add {
+    width: 100%;
+		margin-top: em(47px);
+		@include ifmobile {
+			margin-top: auto;
+		}
+  }
 }
 
-
-.Button {
-	width: 100%;
-	margin-top: auto;
+@include iflaptop {
 }
+@include iftablet {
+}
+

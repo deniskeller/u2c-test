@@ -229,6 +229,8 @@
     background: none;
     padding: 0;
     height: auto;
+		$size: 14px;
+		font-size: em($size);
     line-height: 171%;
 
     @media (hover: hover) {

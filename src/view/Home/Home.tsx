@@ -25,7 +25,7 @@ const Home: React.FC = () => {
         onClick2={() => {
           setOpenedLoanPaymentsPopup(false);
           setTimeout(() => {
-            alert('Платеж успежно совершен!');
+            alert('Платеж успежно рассчитан!');
           }, 500);
         }}
       />
