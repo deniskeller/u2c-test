@@ -22,12 +22,6 @@ const Home: React.FC = () => {
         success_btn_title="delete"
         opened={openedLoanPaymentsPopup}
         onClick={setOpenedLoanPaymentsPopup}
-        onClick2={() => {
-          setOpenedLoanPaymentsPopup(false);
-          setTimeout(() => {
-            alert('Платеж успежно рассчитан!');
-          }, 500);
-        }}
       />
     </>
   );

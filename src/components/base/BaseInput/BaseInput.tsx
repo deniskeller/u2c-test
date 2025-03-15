@@ -74,6 +74,7 @@ const BaseInput: React.FC<Props> = ({
 
       <div className={s.BaseInput_Wrapper}>
         <input
+          id={name}
           value={value}
           pattern={pattern}
           type={newType || type}

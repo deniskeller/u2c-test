@@ -14,7 +14,6 @@ interface Props {
   success_btn_title?: string;
   opened: boolean;
   onClick: (value: boolean) => void;
-  onClick2: (ev: React.MouseEvent<HTMLElement>) => void;
 }
 
 interface FormData {
@@ -37,7 +36,7 @@ const PERIOD_OPTIONS = [
   { label: 'в месяц', value: '1' },
 ];
 
-const LoanPaymentsPopup: React.FC<Props> = ({ opened, onClick, onClick2 }) => {
+const LoanPaymentsPopup: React.FC<Props> = ({ opened, onClick }) => {
   const [value, setValue] = useState<FormData>({
     amount: '',
   });
@@ -50,9 +49,21 @@ const LoanPaymentsPopup: React.FC<Props> = ({ opened, onClick, onClick2 }) => {
   const [amountErrorText, setAmountErrorText] = useState<string>('');
   const [isPeriod, setIsPeriod] = useState<boolean>(false);
 
+  const [monthsChange, setMonthsChange] = useState(MONTHS_OPTIONS[0].value);
+  const [periodChange, setPeriodChange] = useState(PERIOD_OPTIONS[1].value);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const computedTotalPrice = () => {
+    let totalPrice =
+      (Number(value.amount.trim()) / Number(monthsChange)) *
+      Number(periodChange);
+    setTotalPrice(Math.round(totalPrice));
+  };
+
   const calculateAmount = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (value.amount !== '') {
+      computedTotalPrice();
       setIsPeriod(true);
     } else {
       setError(true);
@@ -66,23 +77,13 @@ const LoanPaymentsPopup: React.FC<Props> = ({ opened, onClick, onClick2 }) => {
     }
   }, [value.amount]);
 
-  const [monthsChange, setMonthsChange] = useState(MONTHS_OPTIONS[0].value);
-  const [periodChange, setPeriodChange] = useState(PERIOD_OPTIONS[1].value);
-
-  const computedTotalPrice = () => {
+  useEffect(() => {
     let totalPrice =
       (Number(value.amount.trim()) / Number(monthsChange)) *
       Number(periodChange);
-    return Math.round(totalPrice);
-  };
 
-  useEffect(() => {
-    return () => {
-      setNewValue('', 'amount');
-      setMonthsChange(MONTHS_OPTIONS[0].value);
-      setPeriodChange(PERIOD_OPTIONS[1].value);
-    };
-  }, []);
+    setTotalPrice(Math.round(totalPrice));
+  }, [value.amount, monthsChange, periodChange]);
 
   return (
     <BasePopup opened={opened} onClick={onClick} className={s.Popup}>
@@ -149,24 +150,13 @@ const LoanPaymentsPopup: React.FC<Props> = ({ opened, onClick, onClick2 }) => {
           </div>
 
           <div className={s.TotalPrice}>
-            <span className={s.TotalPrice_Value}>{computedTotalPrice()}</span>
+            <span className={s.TotalPrice_Value}>{totalPrice}</span>
             <span className={s.TotalPrice_Currency}>&nbsp;рублей</span>
           </div>
         </>
       ) : null}
 
-      <BaseButton
-        className={s.Add}
-        onClick={onClick2}
-        // onClick={() => {
-        //   onClick2;
-        //   setNewValue('', 'amount');
-        //   setMonthsChange(MONTHS_OPTIONS[0].value);
-        //   setPeriodChange(PERIOD_OPTIONS[1].value);
-        // }}
-      >
-        Добавить
-      </BaseButton>
+      <BaseButton className={s.Add}>Добавить</BaseButton>
     </BasePopup>
   );
 };

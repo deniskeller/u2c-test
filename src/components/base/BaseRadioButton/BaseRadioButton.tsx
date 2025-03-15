@@ -40,6 +40,7 @@ const BaseRadioButton: React.FC<Props> = ({
           } ${option.disabled ? s.Disabled : ''}`}
         >
           <input
+            id={crypto.randomUUID()}
             disabled={option.disabled}
             type="radio"
             value={option.value}
