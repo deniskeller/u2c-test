@@ -1,132 +1,119 @@
 .BaseInput {
-  font-size: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
 
+  &_Label {
+    display: block;
+    $size: 14px;
+    font-family: 'Lab Grotesque', sans-serif;
+    font-size: em($size);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 171%;
+    color: #000;
+    user-select: none;
+    pointer-events: none;
+    margin-bottom: em(8px, $size);
+  }
+
   &_Wrapper {
     position: relative;
 
-    .Label {
-      user-select: none;
-      position: absolute;
-      z-index: 1;
-      pointer-events: none;
-      top: 50%;
-      left: 0;
-      transform: translate(0, -50%);
-      transform-origin: left top;
-      transition: all $speed ease;
-
-      span {
-        font-family: 'Lab Grotesque', sans-serif;
-        font-size: em(16px);
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        color: #7b7b7b;
-      }
-
-      &__NoEmpty {
-        transform: translate(0, em(-22px)) scale(0.8);
-      }
-    }
-
     .Input {
+      $size: 14px;
       width: 100%;
-      height: em(56px);
-      padding: em(24px) 0 em(8px);
+      height: em(40px, $size);
+      padding: em(8px, $size) em(10px, $size);
       outline: none;
       border: none;
       position: relative;
       box-shadow: none;
       transition: $speed ease all;
-      border-bottom: 1px solid #cfcfcf;
       background: none;
+      border: 1px solid #dfe3e6;
+      border-radius: em(3px, $size);
 
-      color: #000;
       font-family: 'Lab Grotesque', sans-serif;
-      font-size: em(16px);
-      font-style: normal;
       font-weight: 400;
-      line-height: normal;
-      @include placeholder-color(transparent);
+      font-size: em($size);
+      line-height: 171%;
+      color: #000;
+      @include placeholder-color(#bec5cc);
 
       &::-webkit-contacts-auto-fill-button {
         opacity: 0;
       }
+      &:hover {
+        border-color: #000;
+      }
     }
 
-    .Icon {
+    .PasswordCheckbox {
+      position: absolute;
+      font-size: 0;
+      width: 0;
+      height: 0;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      opacity: 0;
+      z-index: -1;
+      &:focus-visible + svg path {
+        stroke: #ff5e56;
+      }
+    }
+
+    .PasswordIcon {
       cursor: pointer;
       position: absolute;
       top: 50%;
-      right: 0;
-      transform: translateY(-50%);
-      width: em(24px);
-      height: em(24px);
+      right: em(10px);
+      transform: translate(0%, -50%);
+      width: em(20px);
+      height: em(20px);
       path {
         transition: stroke $speed ease;
       }
       &:hover {
         path {
-          stroke: #2a86ff;
+          stroke: #ff5e56;
         }
       }
     }
+  }
 
-    &:hover {
-      .Input {
-        border-color: #2a86ff;
-      }
+  &_ErrorText {
+    margin-top: em(4px);
+    p {
+      color: #ea0029;
+      font-family: 'Lab Grotesque', sans-serif;
+      font-size: em(10px);
+      font-weight: 400;
+      line-height: 120%;
     }
   }
 
   &__Focus {
     .BaseInput_Wrapper {
       .Input {
-        border-color: #2a86ff;
+        border-color: #dfe3e6;
       }
-    }
-    .Label {
-      transform: translate(0, em(-22px)) scale(0.8);
     }
   }
 
   &__Error {
     .BaseInput_Wrapper {
       .Input {
-        border-color: #ff4747;
-      }
-    }
-
-    .BaseInput_ErrorText {
-      margin-top: em(5px);
-      p {
-        color: #ff4747;
-        font-family: 'Lab Grotesque', sans-serif;
-        font-size: em(12px);
-        font-weight: 400;
+        border-color: #ea0029;
       }
     }
   }
 
   &__WithIcon {
     .Input {
-      padding-right: em(30px);
+      padding-right: em(50px);
     }
-  }
-
-  &_Checkbox {
-    position: absolute;
-    font-size: 0;
-    width: 0;
-    height: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    opacity: 0;
-    z-index: -1;
   }
 
   &__Disabled,
@@ -138,13 +125,9 @@
 
     .BaseInput_Wrapper {
       .Input {
-        opacity: 0.4;
-      }
-    }
-
-    .Label {
-      span {
-        opacity: 0.6;
+        border-color: #808080;
+        color: #808080;
+        @include placeholder-color(#808080);
       }
     }
   }

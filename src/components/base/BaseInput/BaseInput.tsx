@@ -68,13 +68,11 @@ const BaseInput: React.FC<Props> = ({
         disabled ? s.BaseInput__Disabled : ''
       } ${className}`}
     >
-      <div className={s.BaseInput_Wrapper}>
-        {label ? (
-          <label className={`${s.Label} ${value ? s.Label__NoEmpty : ''}`}>
-            <span>{label}</span>
-          </label>
-        ) : null}
+      <label htmlFor={name} className={s.BaseInput_Label}>
+        {label}
+      </label>
 
+      <div className={s.BaseInput_Wrapper}>
         <input
           value={value}
           pattern={pattern}
@@ -103,12 +101,12 @@ const BaseInput: React.FC<Props> = ({
               type="checkbox"
               checked={checked}
               onChange={() => setChecked(!checked)}
-              className={s.BaseInput_Checkbox}
+              className={s.PasswordCheckbox}
             />
             <BaseIcon
               viewBox="0 0 24 24"
               icon={iconPassword}
-              className={s.Icon}
+              className={s.PasswordIcon}
             />
           </label>
         ) : null}

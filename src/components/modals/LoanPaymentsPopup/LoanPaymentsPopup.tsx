@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './LoanPaymentsPopup.module.scss';
-import { BaseButton, BasePopup, BaseRadioButton, BaseText } from 'base/index';
+import {
+  BaseButton,
+  BaseInput,
+  BasePopup,
+  BaseRadioButton,
+  BaseText,
+} from 'base/index';
 
 interface Props {
   title: string;
@@ -9,6 +15,10 @@ interface Props {
   opened: boolean;
   onClick: (value: boolean) => void;
   onClick2: (ev: React.MouseEvent<HTMLElement>) => void;
+}
+
+interface FormData {
+  amount: string;
 }
 
 const MONTHS_OPTIONS = [
@@ -23,18 +33,56 @@ const MONTHS_OPTIONS = [
 ];
 
 const PERIOD_OPTIONS = [
-  { label: 'в год', value: '1' },
-  { label: 'в месяц', value: '12' },
+  { label: 'в год', value: '12' },
+  { label: 'в месяц', value: '1' },
 ];
 
 const LoanPaymentsPopup: React.FC<Props> = ({ opened, onClick, onClick2 }) => {
-  const handleMonthsChange = (value: string) => {
-    console.log('Selected MONTHS_OPTIONS value:', value);
+  const [value, setValue] = useState<FormData>({
+    amount: '',
+  });
+
+  const setNewValue = (value: string, prop: keyof FormData) => {
+    setValue((prev) => ({ ...prev, [prop]: value }));
   };
 
-  const handlePeriodChange = (value: string) => {
-    console.log('Selected PERIOD_OPTIONS value:', value);
+  const [error, setError] = useState<boolean>(false);
+  const [amountErrorText, setAmountErrorText] = useState<string>('');
+  const [isPeriod, setIsPeriod] = useState<boolean>(false);
+
+  const calculateAmount = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    if (value.amount !== '') {
+      setIsPeriod(true);
+    } else {
+      setError(true);
+      setAmountErrorText('Поле обязательно для заполнения');
+    }
   };
+
+  useEffect(() => {
+    if (value.amount !== '') {
+      setError(false);
+    }
+  }, [value.amount]);
+
+  const [monthsChange, setMonthsChange] = useState(MONTHS_OPTIONS[0].value);
+  const [periodChange, setPeriodChange] = useState(PERIOD_OPTIONS[1].value);
+
+  const computedTotalPrice = () => {
+    let totalPrice =
+      (Number(value.amount.trim()) / Number(monthsChange)) *
+      Number(periodChange);
+    return Math.round(totalPrice);
+  };
+
+  useEffect(() => {
+    return () => {
+      setNewValue('', 'amount');
+      setMonthsChange(MONTHS_OPTIONS[0].value);
+      setPeriodChange(PERIOD_OPTIONS[1].value);
+    };
+  }, []);
 
   return (
     <BasePopup opened={opened} onClick={onClick} className={s.Popup}>
@@ -50,13 +98,23 @@ const LoanPaymentsPopup: React.FC<Props> = ({ opened, onClick, onClick2 }) => {
         лучше спланировать свои финансы.
       </BaseText>
 
-      <div className={s.Amount}>
-        <BaseText as="h2" className={s.Amount_Label}>
-          Ваша сумма кредита
-        </BaseText>
-      </div>
+      <BaseInput
+        type="number"
+        name="amount"
+        label="Ваша сумма кредита"
+        placeholder="Введите данные"
+        value={value.amount}
+        onChange={(val: string) => setNewValue(val, 'amount')}
+        error={error}
+        errorText={amountErrorText}
+        className={s.Amount}
+      />
 
-      <BaseButton variant="text" className={s.Calculate}>
+      <BaseButton
+        variant="text"
+        className={s.CalculateAmount}
+        onClick={calculateAmount}
+      >
         Рассчитать
       </BaseButton>
 
@@ -67,28 +125,46 @@ const LoanPaymentsPopup: React.FC<Props> = ({ opened, onClick, onClick2 }) => {
 
         <BaseRadioButton
           variant="tag"
-          defaultValue={MONTHS_OPTIONS[2].value}
+          defaultValue={MONTHS_OPTIONS[0].value}
           options={MONTHS_OPTIONS}
-          onChange={handleMonthsChange}
+          onChange={setMonthsChange}
           className={s.SelectMonths_Value}
         />
       </div>
 
-      {/* <div className={s.SelectPeriod}>
-        <BaseText as="h2" className={s.SelectPeriod_Label}>
-          Итого ваш платеж по кредиту:
-        </BaseText>
+      {isPeriod ? (
+        <>
+          <div className={s.SelectPeriod}>
+            <BaseText as="h2" className={s.SelectPeriod_Label}>
+              Итого ваш платеж по кредиту:
+            </BaseText>
 
-        <BaseRadioButton
-          variant="tag"
-          defaultValue={PERIOD_OPTIONS[0].value}
-          options={PERIOD_OPTIONS}
-          onChange={handlePeriodChange}
-          className={s.SelectPeriod_Value}
-        />
-      </div> */}
+            <BaseRadioButton
+              variant="tag"
+              defaultValue={PERIOD_OPTIONS[1].value}
+              options={PERIOD_OPTIONS}
+              onChange={setPeriodChange}
+              className={s.SelectPeriod_Value}
+            />
+          </div>
 
-      <BaseButton className={s.Add} onClick={onClick2}>
+          <div className={s.TotalPrice}>
+            <span className={s.TotalPrice_Value}>{computedTotalPrice()}</span>
+            <span className={s.TotalPrice_Currency}>&nbsp;рублей</span>
+          </div>
+        </>
+      ) : null}
+
+      <BaseButton
+        className={s.Add}
+        onClick={onClick2}
+        // onClick={() => {
+        //   onClick2;
+        //   setNewValue('', 'amount');
+        //   setMonthsChange(MONTHS_OPTIONS[0].value);
+        //   setPeriodChange(PERIOD_OPTIONS[1].value);
+        // }}
+      >
         Добавить
       </BaseButton>
     </BasePopup>

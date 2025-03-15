@@ -26,7 +26,6 @@ const BaseRadioButton: React.FC<Props> = ({
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    console.log('value: ', value);
     setSelectedValue(value);
     onChange(value);
   };

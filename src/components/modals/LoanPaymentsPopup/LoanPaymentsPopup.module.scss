@@ -18,11 +18,15 @@
   .Amount {
     margin: em(10px) 0 em(8px);
     @include ifmobile {
+      margin: em(8px) 0 em(8px);
     }
   }
 
-  .Calculate {
+  .CalculateAmount {
     margin-bottom: em(16px, 14px);
+    @include ifmobile {
+      margin-bottom: em(25px, 14px);
+    }
   }
 
   .SelectMonths {
@@ -31,10 +35,14 @@
     align-items: center;
     @include ifmobile {
       flex-direction: column;
-      align-self: start;
+      align-items: start;
     }
     &_Label {
       margin-right: em(38px);
+      @include ifmobile {
+        margin-right: 0;
+        margin-bottom: em(16px);
+      }
     }
 
     &_Value {
@@ -45,16 +53,20 @@
         margin-right: em(8px);
       }
       @include ifmobile {
-        // flex-direction: column;
-        // align-self: start;
       }
     }
   }
 
   .SelectPeriod {
     margin: em(22px) 0 em(31px);
+    @include ifmobile {
+      margin: em(16px) 0 em(26px);
+    }
     &_Label {
       margin-bottom: em(11px);
+      @include ifmobile {
+        margin-bottom: em(16px);
+      }
     }
     &_Value {
       display: flex;
@@ -64,8 +76,18 @@
         margin-right: em(8px);
       }
       @include ifmobile {
-        // flex-direction: column;
-        // align-self: start;
+      }
+    }
+  }
+
+  .TotalPrice {
+    &_Value {
+      font-weight: 400;
+      font-size: em(24px);
+      line-height: 100%;
+      color: #000;
+      @include ifmobile {
+        font-size: em(20px);
       }
     }
   }
@@ -77,9 +99,4 @@
       margin-top: auto;
     }
   }
-}
-
-@include iflaptop {
-}
-@include iftablet {
 }
